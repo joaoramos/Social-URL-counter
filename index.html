@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>JSON Experiment</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.5.1.min.js">\x3C/script>')</script>
+</head>
+<body>
+	<style type="text/css">
+	h3 {
+		margin-top: -15px;
+		font-weight: normal;
+		font-style: italic;
+		font-size: 13px;
+	}
+		
+	div {
+		margin-top: 50px;
+	}
+		
+	.results {
+		font-size: 30px;
+		font-weight: bold;
+	}
+    
+	.results span {
+		border-radius: 4px;
+		padding: 10px;
+		margin: 5px;
+		display: block;
+		background-color: #222;
+		color: white;
+		display: none;
+	}
+	
+	a[rel="jsbin"] {
+		font-size: 11px;
+		color: #222;
+		margin-top: 50px;
+		display: block;
+	}
+	</style>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('input[type="button"]').bind('click', function() {
+		var url = $('input[type="url"]').val();
+		    
+			// Twitter
+			$.getJSON('http://urls.api.twitter.com/1/urls/count.json?url='+url+'&callback=?', function(data) {
+				$('span.twitter').fadeIn().html('Twitter: ' + data.count);
+			});
+		    
+			// Facebook
+			$.getJSON('https://graph.facebook.com/'+url+'&callback=?', function(data) {
+				$('span.facebook').fadeIn().html('Facebook: ' + data.shares);
+			});
+			  
+		});
+		  
+	});
+	</script>
+		
+	<h1>URL Share-count experiment</h1>
+	<h3>— Retrieving JSON data out from a URL (using <a href="http://api.jquery.com/jQuery.getJSON/">$.getJSON</a>)</h3>
+	
+	<div>
+		<input type="url" placeholder="Insert URL" required />
+		<input type="button" value="Get share count" />
+	</div>
+	
+	<div class="results">
+		<span class="twitter"></span>
+		<span class="facebook"></span>
+	</div>
+	
+	<a href="http://jsbin.com/iyonag/2/edit" rel="jsbin">JSBin</a>
+	
+</body>
+</html>
