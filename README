@@ -1,1 +1,1 @@
-Wohoo!
+This is a small jQuery script that retrieves public, JSON formatted data (using $.getJSON and JSONP) out from a given URL. It gives you the number of shares on Facebook (all time) and the number of tweets sharing that URL during last week (Twitter).
